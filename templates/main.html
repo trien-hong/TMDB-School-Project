@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/style.css"/>
+        <style> 
+            body {
+                font-family: sans-serif;
+                text-align: center;
+                background-image: url({{background}});
+                background-repeat: no-repeat;
+                background-position: top;
+                background-color: aquamarine;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="basic_user_info">
+            <h2>Welcome, {{user}}!</h2>
+            <form method="GET" action="/logout">
+                <input type="submit" value="LOGOUT"/>
+            </form>
+            <p>Please logout when done!</p>
+        </div>    
+        <a class="profile_link" href="/profile">Profile Page</a>
+        <div class="movie_info">
+            <h1><u>Movie Explorer</u></h1>
+            <h2>{{movie_title}}</h2>
+            <h3>{{movie_tagline}}</h3>
+            <h4>Genres: {{movie_genres}}</h4>
+        </div>
+        <img src={{movie_poster}} alt="Movie Poster">
+        <br>
+        <br>
+        <div class="audio_player">
+            <b><p>Ending theme song for <i>{{movie_title}}</i></p></b>
+            <p>"{{audio_title}}" by {{audio_artist}}</p>
+            <audio controls>
+                <source src={{audio}} type="audio/mpeg">
+            </audio>
+        </div>
+        <br>
+        <br>
+        <a class="wiki_link" href="{{wiki_page}}" target="_blank" rel="noopener noreferrer">Click here for wikipedia page on the movie!</a>
+        <br>
+        <div class="comments">
+            <form method="POST" action="/">
+                <p><b>Title: </b><input type="text" name="movie_title" value="{{movie_title}}" size="40" readonly><p>
+                <p><b>Rating: </b><input type="number" name="rating" min="1" max="10" placeholder="1-10" size="1"/></p>
+                <textarea type="text" name="comment" placeholder="Leave a comment here!" maxlength="500"></textarea>
+                <br>
+                <input type="submit" value="SUBMIT"/>
+                <p>Max length of 500 characters!</p>
+            </form>
+            <hr>
+            <h3>Here what others have to say or be the first!</h3>
+            <hr>
+            {% for comment in comments %}
+                {% if((comment.rating != "") or (comment.comment != "")) %}
+                    <p><b>User:</b> {{comment.username}}</p>
+                {% endif %}
+                {% if comment.rating != "" %}
+                    <p><b>Rating:</b> {{comment.rating}}</p>
+                {% endif %}
+                <p>{{comment.comment}}</p>
+                {% if((comment.rating != "") or (comment.comment != "")) %}
+                    <hr>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </body>
+</html>
