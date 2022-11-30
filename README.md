@@ -18,3 +18,9 @@ Note that you will also need to install python, python-dotenv, flask, flask-logi
 ### Running
 
 Before you can start, your database is currently empty. You need to initialize a new database. You can do so in your terminal with these commands, ```python3```, ```from app import db```, ```import models```, and ```db.create_all()```. Your database is now initalize so CTRL+D to exit the session. Once your .env is setup, your dependencies are installed, and database initialize, within your terminal type in ```npm run build``` then ```python3 app.py``` to run the app.
+
+## NOTE
+
+NOTE: Heroku is removing their free tier starting on November 28, 2022. The method to get the free remote database will likely no longer work.
+
+[https://help.heroku.com/RSBRUH58/removal-of-heroku-free-product-plans-faq](https://help.heroku.com/RSBRUH58/removal-of-heroku-free-product-plans-faq)
